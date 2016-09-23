@@ -1,0 +1,223 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2016-07-19T10:19:14Z",
+    "title": "CPA AML Users API"
+  },
+  "host": "pn0vyjoxhk.execute-api.ap-southeast-1.amazonaws.com",
+  "basePath": "/dev",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/user": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "200 response"
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "uri": "http://a781693454d7411e68b53065eb1a4a54-2076603580.ap-southeast-1.elb.amazonaws.com:8080/v1/user",
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "GET",
+          "type": "http"
+        }
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "User",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response"
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "uri": "http://a781693454d7411e68b53065eb1a4a54-2076603580.ap-southeast-1.elb.amazonaws.com:8080/v1/user",
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "type": "http"
+        }
+      }
+    },
+    "/user/{username}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "400 response"
+          },
+          "404": {
+            "description": "404 response"
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "requestParameters": {
+            "integration.request.path.username": "method.request.path.username"
+          },
+          "uri": "http://a781693454d7411e68b53065eb1a4a54-2076603580.ap-southeast-1.elb.amazonaws.com:8080/v1/user/{username}",
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "GET",
+          "type": "http"
+        }
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "User",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response"
+          },
+          "400": {
+            "description": "400 response"
+          },
+          "404": {
+            "description": "404 response"
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "requestParameters": {
+            "integration.request.path.username": "method.request.path.username"
+          },
+          "uri": "http://a781693454d7411e68b53065eb1a4a54-2076603580.ap-southeast-1.elb.amazonaws.com:8080/v1/user/{username}",
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "PUT",
+          "type": "http"
+        }
+      },
+      "delete": {
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response"
+          },
+          "400": {
+            "description": "400 response"
+          },
+          "404": {
+            "description": "404 response"
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "requestParameters": {
+            "integration.request.path.username": "method.request.path.username"
+          },
+          "uri": "http://a781693454d7411e68b53065eb1a4a54-2076603580.ap-southeast-1.elb.amazonaws.com:8080/v1/user/{username}",
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "DELETE",
+          "type": "http"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "username": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "userStatus": {
+          "type": "integer",
+          "format": "int32",
+          "description": "User Status"
+        }
+      }
+    }
+  }
+}

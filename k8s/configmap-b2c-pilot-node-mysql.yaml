@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-b2c-pilot-node-mysql
+data:
+  mysql.database: b2cpilotnode
+  mysql.server-addr: aml-b2c-pilot-node-backend-mysql.czzrtrqbmc0f.ap-southeast-1.rds.amazonaws.com:3306 
+  mysql.server-port: "3306"
