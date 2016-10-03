@@ -1,0 +1,28 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: depl-b2c-pilot-node-aggr
+  labels:
+    solution-centre.name: snm-aml
+    product-team.name: aml
+    product.name: b2c-pilot-node
+    application.tier: aggr
+
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        solution-centre.name: snm-aml
+        product-team.name: aml
+        product.name: b2c-pilot-node
+        application.tier: aggr
+    spec:
+      containers:
+      - name: b2c-pilot-node-aggr
+        image: 921141745046.dkr.ecr.us-west-2.amazonaws.com/snm-aml/aml_b2c-pilot-node_aggr:v5
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          protocol: TCP

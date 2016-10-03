@@ -1,0 +1,61 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: depl-b2c-pilot-node-backend
+  labels:
+    solution-centre.name: snm-aml
+    product-team.name: aml
+    product.name: b2c-pilot-node
+    application.tier: backend
+
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        solution-centre.name: snm-aml
+        product-team.name: aml
+        product.name: b2c-pilot-node
+        application.tier: backend
+    spec:
+      containers:
+      - name: b2c-pilot-node-backend
+        image: 921141745046.dkr.ecr.us-west-2.amazonaws.com/snm-aml/aml_b2c-pilot-node_backend:v1
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        env:
+        - name: USER_VAR
+          value: important information
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        - name: REDIS_URL
+          valueFrom:
+            configMapKeyRef:
+              name: configmap-b2c-pilot-node-redis
+              key: redis.redis-url
+        - name: REDIS_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: configmap-b2c-pilot-node-redis
+              key: redis.redis-port
+        - name: REDIS_PWD
+          valueFrom:
+            secretKeyRef:
+              name: secret-b2c-pilot-node-redis
+              key: password
+
+
+

@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  labels:
+    run: sematext-agent
+  name: sematext-agent
+  namespace: b2c-pilot-3scalegateway
+spec:
+  replicas: 1
+  selector:
+    run: sematext-agent
+  strategy:
+    resources: {}
+    rollingParams:
+      intervalSeconds: 1
+      maxSurge: 25%
+      maxUnavailable: 25%
+      timeoutSeconds: 600
+      updatePeriodSeconds: 1
+    type: Rolling
+  template:
+    metadata:
+      labels:
+        run: sematext-agent
+    spec:
+      containers:
+      - env:
+        - name: SPM_TOKEN
+          value: f794c7dd-01ce-4f11-888e-4dc759f19684
+        image: sematext/sematext-agent-docker
+        imagePullPolicy: Always
+        name: sematext-agent
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        volumeMounts:
+          - mountPath: /var/run
+            name: spm-volume
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: spm-volume
+        hostPath:
+          path: /var/run
+  test: false
+  triggers:
+  - type: ConfigChange
+
